@@ -2,7 +2,7 @@ local component = require("component")
 local sides = require("sides")
 local io = require("io")
 
--- Functions
+-- Function Definitions
 function stringToSide(side)
   if(side=="top") then return sides.top
   elseif(side=="bottom") then return sides.bottom
@@ -13,9 +13,13 @@ function stringToSide(side)
   else return "err"
   end
 end
+
 -- Variable Definitions
 local reactorSide
-local bufferSide
+local spentCoolantSide
+local newCoolantSide
+local spentRodSide
+local newRodSide
 
 local inventoryController
 
@@ -31,31 +35,66 @@ for k,v in component.list("inventory_controller", true) do
 end
 
 
-
+-- ask for sides
 
 local e = false
 while(e == false) do
   print("Reactor Side (N/E/S/W/TOP/BOTTOM):")
   reactorSide = stringToSide(string.lower(io.read()))
- 
+
   e = true
   if(reactorSide == "err") then
     print("Invalid Input")
     e = false 
   end
 end
- 
+
 e = false
 while(e == false) do
-  print("Buffer Side (N/E/S/W/TOP/BOTTOM):")
-  bufferSide = stringToSide(string.lower(io.read()))
- 
+  print("Cold Coolant Side (N/E/S/W/TOP/BOTTOM):")
+  newCoolantSide = stringToSide(string.lower(io.read()))
+
   e = true
-  if(bufferSide == "err") then
+  if(newCoolantSide == "err") then
     print("Invalid Input")
     e = false 
   end
 end
 
+e = false
+while(e == false) do
+  print("Hot Coolant Side (N/E/S/W/TOP/BOTTOM):")
+  spentCoolantSide = stringToSide(string.lower(io.read()))
+
+  e = true
+  if(spentCoolantSide == "err") then
+    print("Invalid Input")
+    e = false 
+  end
+end
+
+e = false
+while(e == false) do
+  print("Spent Fuel Rods Side (N/E/S/W/TOP/BOTTOM):")
+  spentRodSide = stringToSide(string.lower(io.read()))
+
+  e = true
+  if(spentRodSide == "err") then
+    print("Invalid Input")
+    e = false 
+  end
+end
+
+e = false
+while(e == false) do
+  print("New Fuel Rods Side (N/E/S/W/TOP/BOTTOM):")
+  newRodSide = stringToSide(string.lower(io.read()))
+
+  e = true
+  if(newRodSide == "err") then
+    print("Invalid Input")
+    e = false 
+  end
+end
 
 -- Main Program Loop
